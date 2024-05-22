@@ -150,52 +150,51 @@
     </style>
     
   </head>
-  <body>
+<body>
+    <main>
+        <div class="container py-4">
+            <header class="pb-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none">
+                    <span class="fs-1">eXtarctor</span>
+                </a>
+            </header>
 
-    
-<main>
-  <div class="container py-4">
-    <header class="pb-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none">
-        <span class="fs-1">eXtarctor</span>
-      </a>
-    </header>
+            <p>
+                <form method="post" action="/upload" enctype="multipart/form-data">
+                    <div class="d-grid gap-2">
+                        <label for="audioFileUpload" class="btn btn-outline-light">Upload File</label>
+                        <input id="audioFileUpload" type="file" name="audiofile" style="display: none;" onchange="this.form.submit()">
+                    </div>
+                </form>
+            </p>
 
-
-    <p>
-        <form method="post" action="/upload" enctype="multipart/form-data">
-            <div class="d-grid gap-2">
-                <label for="audioFileUpload" class="btn btn-outline-light">Upload File</label>
-                <input id="audioFileUpload" type="file" name="audiofile" style="display: none;" onchange="this.form.submit()">
+            <div class="row align-items-md-stretch">
+                <div class="col-md">
+                    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                        <h2>Information</h2>
+                        {% autoescape false %}
+                        <p id="corrected_transcript">{{transcript}}</p>
+                        {% endautoescape %}
+                        {% if pptx_file %}
+                        <a href="/download/{{ pptx_file }}" class="btn btn-outline-primary mt-3">Download Presentation</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-        </form>
-    </p>
-
-    <div class="row align-items-md-stretch">
-      <div class="col-md">
-        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-          <h2>Information</h2>
-          {% autoescape false %}<p id="corrected_transcript">{{transcript}}</p>{% endautoescape %}
+            <footer class="pt-3 mt-4 text-body-secondary border-top fixed-bottom"></footer>
         </div>
-      </div>
-    </div>
-    <footer class="pt-3 mt-4 text-body-secondary border-top fixed-bottom"></footer>
-    </div>
 
-    <div class="loader-wrapper">
-        <span class="loader"><span class="loader-inner"></span></span>
-    </div>
+        <div class="loader-wrapper">
+            <span class="loader"><span class="loader-inner"></span></span>
+        </div>
+    </main>
+    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        $(window).on("load",function(){
+            $(".loader-wrapper").fadeOut("slow");
+        });
 
-</main>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script>
-
-$(window).on("load",function(){
-    $(".loader-wrapper").fadeOut("slow");
-});
-
-
-const audioFileUpload = document.getElementById("audioFileUpload");
-
-</script>
-</body></html>
+        const audioFileUpload = document.getElementById("audioFileUpload");
+    </script>
+</body>
+</html>
