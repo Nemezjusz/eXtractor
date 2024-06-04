@@ -8,10 +8,9 @@ client = OpenAI(api_key=API_KEY)
 
 app = Flask(__name__)
 
-# Configure the upload folder and allowed extensions
-app.config['UPLOAD_FOLDER'] = 'uploads/'  # make sure this directory exists
+app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = {'pdf', 'docx', 'txt'}
-app.config['PPTX_FOLDER'] = 'presentations/'  # folder to store pptx files
+app.config['PPTX_FOLDER'] = 'presentations/'
 
 os.makedirs(app.config['PPTX_FOLDER'], exist_ok=True)
 
@@ -20,7 +19,17 @@ def extract_info(transcript):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an information extraction assistant, skilled in extracting information"},
-            {"role": "user", "content": f"Find information about deadline in following text: {transcript}. Return text in following format: 'Date of the deadline: <found date>'"}
+            {"role": "user", "content": f"Znajdz informacje w następujacym tekście: {transcript}. "
+                                        f"Zwróć poszukiwane informacje w nastepującym formacie "
+                                        
+                                        f"Nazwa Klienta: <uzupełnij>"
+                                        f"Adres Klienta: <uzupełnij>"
+                                        f"Typ prztargu: <uzupełnij>"
+                                        f"Koszty przetargu: <uzupełnij>"
+                                        f"Model płatności: <uzupełnij>"
+                                        f"Liczba użytkowników: <uzupełnij>"
+                                        f"Termin Składania Ofert: <uzupełniji>"
+                                        f"Termin Realizacji Projektu: <uzupełniji>"}
         ]
     )
     return completion.choices[0].message.content
